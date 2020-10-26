@@ -1,11 +1,9 @@
 
-public class Docente extends Persona{
-	
+public class Docente extends Persona {
+
 	protected int codigoProfesor;
 	protected String areaDocente;
-	
-	
-	
+
 	Docente(String nombre, String apellidos, String anioNacimiento, int codigoProfesor, String areaDocente) {
 		super(nombre, apellidos, anioNacimiento);
 		this.codigoProfesor = codigoProfesor;
@@ -30,8 +28,8 @@ public class Docente extends Persona{
 
 	@Override
 	public String toString() {
-		return "Docente [nombre ="+nombre+ " ,apellido="+apellidos+",codigoProfesor=" + codigoProfesor + ", areaDocente=" + areaDocente + "]";
+		return "Docente [nombre =" + nombre + " ,apellido=" + apellidos + ",codigoProfesor=" + codigoProfesor
+				+ ", areaDocente=" + areaDocente + "]";
 	}
 
-	
 }

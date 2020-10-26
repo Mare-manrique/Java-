@@ -1,30 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Grupo {
 
-	public String horario;
-	public String nombreGrupo;
-	public int codigoGrupo;
-	
+	private String horario;
+	private String nombreGrupo;
+	private int codigoGrupo;
+	private List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+	Scanner sc = new Scanner(System.in);
 
-	Asignatura asignatura;
 	Docente docente;
-	Alumno alumno;
-	Alumno alumno1;
 
-	public Grupo() {
-
-	}
-
-	public Grupo(String nombreGrupo, int codigoGrupo, String horario, Asignatura asigantura, Docente docente,
-			Alumno alumno, Alumno alumno1) {
+	public Grupo(String horario, String nombreGrupo, int codigoGrupo, Docente docente) {
 		super();
 		this.horario = horario;
 		this.nombreGrupo = nombreGrupo;
 		this.codigoGrupo = codigoGrupo;
 		this.docente = docente;
-		this.alumno = alumno;
-		this.alumno1 = alumno1;
-		this.asignatura = asigantura;
+	}
+
+	public Grupo() {
+
 	}
 
 	public String getHorario() {
@@ -51,14 +48,6 @@ public class Grupo {
 		this.codigoGrupo = codigoGrupo;
 	}
 
-	public Asignatura getAsignatura() {
-		return asignatura;
-	}
-
-	public void setAsignatura(Asignatura asignatura) {
-		this.asignatura = asignatura;
-	}
-
 	public Docente getDocente() {
 		return docente;
 	}
@@ -67,21 +56,14 @@ public class Grupo {
 		this.docente = docente;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
+	public void agregarAlumno(Alumno alumno) {
+		listaAlumnos.add(alumno);
 	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
-
-
 
 	@Override
 	public String toString() {
 		return "Grupo [horario=" + horario + ", nombreGrupo=" + nombreGrupo + ", codigoGrupo=" + codigoGrupo
-				+ ", asignatura=" + asignatura + ", docente=" + docente + ", alumno=" + alumno + ", alummno1= "+alumno1+"]";
+				+ ", docente=" + docente + ", alumno=" + listaAlumnos + "]";
 	}
-	
 
 }

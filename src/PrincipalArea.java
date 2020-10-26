@@ -5,26 +5,27 @@ import java.util.Scanner;
 public class PrincipalArea {
 
 	public static List<Asignatura> listaAsiganturas = new ArrayList<Asignatura>();
-
-	public static List<Docente> listaDocentes = new ArrayList<Docente>();
-	public static List<Alumno> listaAlumnos = new ArrayList<Alumno>();
 	public static List<Grupo> listaGrupo = new ArrayList<Grupo>();
+	public static List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+	public static List<Docente> listaDocentes = new ArrayList<Docente>();
 
 	public static void main(String[] args) {
 
-		Asignatura asignatura = new Asignatura(111205, "Matematicas", "calculadora");
-		Asignatura asignatura1 = new Asignatura(111205, "Linguistica", "Libros");
+		Scanner sc = new Scanner(System.in);
 
-		listaAsiganturas.add(asignatura);
-		listaAsiganturas.add(asignatura1);
+		Docente docenteMartin = new Docente("Martin", "Ochoa", "1975", 74581, "Matematica pura");
+		Docente docenteCamilo = new Docente("Camilo", "Rodriguez", "1980", 47512, "Matematica pura");
+		Docente docenteMariana = new Docente("Mariana", "Camargo", "1991", 67312, "Linguistica");
 
-		Docente docente = new Docente("Martin", "Ochoa", "1975", 74581, "Matematica pura");
-		Docente docente1 = new Docente("Camilo", "Rodriguez", "1980", 47512, "Matematica pura");
-		Docente docente2 = new Docente("Mariana", "Camargo", "1991", 67312, "Linguistica");
+		listaDocentes.add(docenteMartin);
+		listaDocentes.add(docenteCamilo);
+		listaDocentes.add(docenteMariana);
 
-		listaDocentes.add(docente);
-		listaDocentes.add(docente1);
-		listaDocentes.add(docente2);
+		Asignatura asignaturaMatematicas = new Asignatura(111205, "Matematicas", "calculadora");
+		Asignatura asignaturaLinguistica = new Asignatura(111205, "Linguistica", "Libros");
+
+		listaAsiganturas.add(asignaturaMatematicas);
+		listaAsiganturas.add(asignaturaLinguistica);
 
 		Alumno alumno = new Alumno("Maria", "Espitia", "2001", 12345, "Dos");
 		Alumno alumno1 = new Alumno("Carla", "Rodriguez", "1997", 24561, "Tres");
@@ -40,19 +41,62 @@ public class PrincipalArea {
 		listaAlumnos.add(alumno4);
 		listaAlumnos.add(alumno5);
 
-		Grupo grupo = new Grupo("Matematicas-1", 123, "8-10", asignatura, docente, alumno, alumno2);
-		Grupo grupo1 = new Grupo("Matematicas-2", 123, "4-8", asignatura, docente1, alumno1, alumno4);
-		Grupo grupo2 = new Grupo("Linguistica", 159, "6-8", asignatura1, docente2, alumno3, alumno5);
+		Grupo grupo1 = new Grupo("8-10", "Matematicas-1", 123, docenteMartin);
+		Grupo grupo2 = new Grupo("4-8", "Matematicas-2", 147, docenteCamilo);
+		Grupo grupo3 = new Grupo("6-8", "Linguistica", 159, docenteMariana);
 
-		listaGrupo.add(grupo);
 		listaGrupo.add(grupo1);
 		listaGrupo.add(grupo2);
+		listaGrupo.add(grupo3);
 
-		System.out.println("Digite la posicion del grupo que desea ver");
-		Scanner sc = new Scanner(System.in);
-		int posicionGrupo = sc.nextInt();
+		for (Grupo group : listaGrupo) {
+			for (Asignatura asignatura : listaAsiganturas) {
+				System.out.println("Desea añadir este grupo " + group.getNombreGrupo() + " a la asigantura "
+						+ asignatura.getNombreAsignatura() + "  ?s/n ");
+				String opcion = sc.next();
+				if (opcion.equalsIgnoreCase("s")) {
+					asignatura.agregarGrupo(group);
+					break;
+				}
+			}
+		}
 
-		System.out.println(listaGrupo.get(posicionGrupo-1));
+		
+		
+			for (Alumno alum : listaAlumnos) {
+				for (Asignatura asignatura : listaAsiganturas) {
+				System.out.println("Desea añadir este alumno a la asignatura " + asignatura.getNombreAsignatura()
+						+ "  ? s/n " + alum);
+				String opcionGrupo = sc.next();
+				if (opcionGrupo.equalsIgnoreCase("s")) {
+					for (Grupo group : listaGrupo) {
+						System.out.println(
+								"Desea añadir este alumno al grupo " + group.getNombreGrupo() + "? s/n " + alum);
+						String opcion = sc.next();
+						if (opcion.equalsIgnoreCase("s")) {
+							grupo1.agregarAlumno(alum);
+							break;
+						}
+
+					}
+				}
+
+			}
+		}
+
+		System.out.println();
+		for (int i = 0; i < listaAsiganturas.size(); i++) {
+			System.out.println(listaAsiganturas.get(i));
+		}
+
+		System.out.println("Ingrese el codigo del grupo que desa ver");
+		int codigoGrupo = sc.nextInt();
+		for (Grupo group : listaGrupo) {
+			if ((group.getCodigoGrupo()) == codigoGrupo) {
+				System.out.println(group);
+			}
+
+		}
 
 	}
 
