@@ -7,8 +7,7 @@ public class Asignatura {
 	public String nombreAsignatura;
 	public String materiales;
 	public List<Grupo> listaGrupo = new ArrayList<Grupo>();
-
-	private Grupo group;
+	
 
 	public Asignatura() {
 

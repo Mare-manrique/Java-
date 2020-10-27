@@ -4,7 +4,9 @@ public class Persona {
 	protected String apellidos;
 	protected String anioNacimiento;
 	
-	
+	public Persona() {
+		
+	}
 	
 	public Persona(String nombre, String apellidos,
 			String anioNacimiento) {

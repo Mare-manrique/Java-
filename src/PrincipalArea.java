@@ -1,6 +1,13 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * @author: Maria Espitia
+ * @version: 26/10/2020
+ *
+ */
 
 public class PrincipalArea {
 
@@ -12,74 +19,224 @@ public class PrincipalArea {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
+		int cantidadDocentes;
+		int cantidadAsignaturas;
+		int cantidadGrupos;
+		int cantidadAlumnos;
+		boolean leido = false;
+		Docente docente = new Docente();
+		Asignatura asignatura = new Asignatura();
+		Grupo grupo = new Grupo();
+		Alumno alumno = new Alumno();
 
-		Docente docenteMartin = new Docente("Martin", "Ochoa", "1975", 74581, "Matematica pura");
-		Docente docenteCamilo = new Docente("Camilo", "Rodriguez", "1980", 47512, "Matematica pura");
-		Docente docenteMariana = new Docente("Mariana", "Camargo", "1991", 67312, "Linguistica");
+		do {
+			/**
+			 * //@exception InputMismatchException ex, ESTA ES LANZADA POR UN OBJETO
+			 * SCANNER, LA CUAL INDICA QUE EL TIPO DE VARIABLE INGRESADO, NO COINCIDE CON EL
+			 * ESPERADO
+			 */
+			try {
+				System.out.println("Digite la cantidad de docentes a ingresar");// SE PIDE LA CANTIDAD DE DOCENTES A
+																				// CREAR
+				cantidadDocentes = sc.nextInt();
 
-		listaDocentes.add(docenteMartin);
-		listaDocentes.add(docenteCamilo);
-		listaDocentes.add(docenteMariana);
+				for (int i = 0; i < cantidadDocentes; i++) {// PIDE LA INFORMACION DE CADA DOCENTE DEPENDIENDO DE LA
+															// CANTIDAD DE DOCENTES
+					docente = new Docente();
+					System.out.println("Digite el nombre del docente " + (i + 1));
+					docente.nombre = sc.next();
+					System.out.println("Digite el apellido del docente " + (i + 1));
+					docente.apellidos = sc.next();
+					System.out.println("Digite el año de nacimiento del docente " + (i + 1));
+					docente.anioNacimiento = sc.next();
+					System.out.println("Digite el codigo del docente " + (i + 1));
+					docente.codigoProfesor = sc.nextInt();
+					System.out.println("Digite el area del docente " + (i + 1));
+					docente.areaDocente = sc.next();
 
-		Asignatura asignaturaMatematicas = new Asignatura(111205, "Matematicas", "calculadora");
-		Asignatura asignaturaLinguistica = new Asignatura(111205, "Linguistica", "Libros");
+					listaDocentes.add(docente);
+					leido = true;
+				}
 
-		listaAsiganturas.add(asignaturaMatematicas);
-		listaAsiganturas.add(asignaturaLinguistica);
+			} catch (InputMismatchException ex) {
+				System.out.println("Ah introducido un valor erroneo en el codigo del docente");
+				sc.next(); // SE LEE EL ELEMENTO NO RECONOCIDO POR EL TRY PARA ELIMINARLO
+				leido = false;
+			}
 
-		Alumno alumno = new Alumno("Maria", "Espitia", "2001", 12345, "Dos");
-		Alumno alumno1 = new Alumno("Carla", "Rodriguez", "1997", 24561, "Tres");
-		Alumno alumno2 = new Alumno("Camilo", "Camargo", "2000", 12485, "Dos");
-		Alumno alumno3 = new Alumno("David", "Peñaloza", "1998", 57846, "Dos");
-		Alumno alumno4 = new Alumno("Teresa", "Arias", "1999", 47621, "Tres");
-		Alumno alumno5 = new Alumno("Maicol", "Ortiz", "2001", 31524, "Dos");
+		} while (leido == false);
 
-		listaAlumnos.add(alumno);
-		listaAlumnos.add(alumno1);
-		listaAlumnos.add(alumno2);
-		listaAlumnos.add(alumno3);
-		listaAlumnos.add(alumno4);
-		listaAlumnos.add(alumno5);
+		System.out.println(listaDocentes);
 
-		Grupo grupo1 = new Grupo("8-10", "Matematicas-1", 123, docenteMartin);
-		Grupo grupo2 = new Grupo("4-8", "Matematicas-2", 147, docenteCamilo);
-		Grupo grupo3 = new Grupo("6-8", "Linguistica", 159, docenteMariana);
+		do {
+			/**
+			 * //@exception InputMismatchException ex, ESTA ES LANZADA POR UN OBJETO
+			 * SCANNER, LA CUAL INDICA QUE EL TIPO DE VARIABLE INGRESADO, NO COINCIDE CON EL
+			 * ESPERADO
+			 */
+			try {
+				System.out.println("Digite la cantidad de asignaturas a ingresar");// SE PIDE LA CANTIDAD DE ASIGNATURAS
+																					// A CREAR
+				cantidadAsignaturas = sc.nextInt();
 
-		listaGrupo.add(grupo1);
-		listaGrupo.add(grupo2);
-		listaGrupo.add(grupo3);
+				for (int i = 0; i < cantidadAsignaturas; i++) {// PIDE LA INFORMACION DE CADA ASIGNATURA DEPENDIENDO DE
+																// LA CANTIDAD DE ASIGNATURAS
+					asignatura = new Asignatura();
+					System.out.println("Digite el codigo de la asignatura " + (i + 1));
+					int codigoAsignatura = sc.nextInt();
+					asignatura.setCodigoAsignatura(codigoAsignatura);
+					System.out.println("Digite el nombre de la asignatura" + (i + 1));
+					String nombreAsignatura = sc.next();
+					asignatura.setNombreAsignatura(nombreAsignatura);
+					System.out.println("Digite los materiales de la asignatura " + (i + 1));
+					String materiales = sc.next();
+					asignatura.setMateriales(materiales);
 
-		for (Grupo group : listaGrupo) {
-			for (Asignatura asignatura : listaAsiganturas) {
-				System.out.println("Desea añadir este grupo " + group.getNombreGrupo() + " a la asigantura "
-						+ asignatura.getNombreAsignatura() + "  ?s/n ");
+					listaAsiganturas.add(asignatura);
+					leido = true;
+
+				}
+
+			} catch (InputMismatchException ex) {
+				System.out.println("Ah introducido un valor erroneo en el codigo de la asignatura");
+				sc.next(); // SE LEE EL ELEMENTO NO RECONOCIDO POR EL TRY PARA ELIMINARLO
+				leido = false;
+			}
+
+		} while (leido == false);
+
+		System.out.println(listaAsiganturas);
+
+		do {
+			/**
+			 * //@exception InputMismatchException ex, ESTA ES LANZADA POR UN OBJETO
+			 * SCANNER, LA CUAL INDICA QUE EL TIPO DE VARIABLE INGRESADO, NO COINCIDE CON EL
+			 * ESPERADO
+			 */
+			try {
+				System.out.println("Digite la cantidad de grupos a ingresar");// SE PIDE LA CANTIDAD DE GRUPOS A CREAR
+				cantidadGrupos = sc.nextInt();
+
+				for (int i = 0; i < cantidadGrupos; i++) {// PIDE LA INFORMACION DE CADA GRUPO DEPENDIENDO DE LA
+															// CANTIDAD DE GRUPOS
+					grupo = new Grupo();
+					System.out.println("Digite el horario del grupo" + (i + 1));
+					String horarioGrupo = sc.next();
+					grupo.setHorario(horarioGrupo);
+
+					System.out.println("Digite el nombre del grupo " + (i + 1));
+					String nombreGrupo = sc.next();
+					grupo.setNombreGrupo(nombreGrupo);
+
+					System.out.println("Digite el codigo del grupo " + (i + 1));
+					int codigoGrupo = sc.nextInt();
+					grupo.setCodigoGrupo(codigoGrupo);
+
+					listaGrupo.add(grupo);
+					leido = true;
+				}
+
+			} catch (InputMismatchException ex) {
+				System.out.println("Ah introducido un valor erroneo en el codigo del grupo");
+				sc.next(); // SE LEE EL ELEMENTO NO RECONOCIDO POR EL TRY PARA ELIMINARLO
+				leido = false;
+			}
+
+		} while (leido == false);
+
+		System.out.println(listaGrupo);
+
+		do {
+			/**
+			 * //@exception InputMismatchException ex, ESTA ES LANZADA POR UN OBJETO
+			 * SCANNER, LA CUAL INDICA QUE EL TIPO DE VARIABLE INGRESADO, NO COINCIDE CON EL
+			 * ESPERADO
+			 */
+			try {
+				System.out.println("Digite la cantidad de alumnos a ingresar");// SE PIDE LA CANTIDAD DE GRUPOS A CREAR
+				cantidadAlumnos = sc.nextInt();
+
+				for (int i = 0; i < cantidadAlumnos; i++) {// PIDE LA INFORMACION DE CADA ALUMNO DEPENDIENDO DE LA
+															// CANTIDAD DE ALUMNOS
+
+					alumno = new Alumno();
+					System.out.println("Digite el nombre del alumno " + (i + 1));
+					String nombreAlumno = sc.next();
+					alumno.setNombre(nombreAlumno);
+					System.out.println("Digite el apellido del alumno" + (i + 1));
+					String apellidoAlumno = sc.next();
+					alumno.setApellidos(apellidoAlumno);
+					System.out.println("Digite el año de nacimiento del alumno " + (i + 1));
+					String anioNaAlumno = sc.next();
+					alumno.setAnioNacimiento(anioNaAlumno);
+					System.out.println("Digite el codigo del alumno " + (i + 1));
+					int codigoAlumno = sc.nextInt();
+					alumno.setCodigoEstudiantil(codigoAlumno);
+					System.out.println("Digite el semestre que cursa el alumno " + (i + 1));
+					String semestre = sc.next();
+					alumno.setSemestre(semestre);
+
+					listaAlumnos.add(alumno);
+					leido = true;
+
+				}
+
+			} catch (InputMismatchException ex) {
+				System.out.println("Ah introducido un valor erroneo en el codigo del alumno");
+				sc.next(); // SE LEE EL ELEMENTO NO RECONOCIDO POR EL TRY PARA ELIMINARLO
+				leido = false;
+			}
+
+		} while (leido == false);
+
+		System.out.println(listaAlumnos);
+		
+
+		for (Docente docentes : listaDocentes) {
+			for (Grupo group : listaGrupo) {
+				System.out.println("Desea añadir el docente " + docentes.getNombre() + " al grupo "
+						+ group.getNombreGrupo() + " ? s/n");
+				String opcionDocente = sc.next();
+				if (opcionDocente.equalsIgnoreCase("s")) {
+					group.setDocente(docentes);
+					break;
+				}
+				
+			}
+		}
+
+		for (Grupo group : listaGrupo) {// RECORRERA LA LISTA DE GRUPO
+			for (Asignatura asignatur : listaAsiganturas) {// RECORRERA LA LISTA DE ASIGNATURAS
+				System.out.println("Desea añadir el grupo " + group.getNombreGrupo() + " a la asigantura "
+						+ asignatur.getNombreAsignatura() + "  ?s/n ");
 				String opcion = sc.next();
 				if (opcion.equalsIgnoreCase("s")) {
-					asignatura.agregarGrupo(group);
-					break;
+					asignatur.agregarGrupo(group);// SE AGREGA EL GRUPO SELECECIONADO A LA ASIGNATURA
+					break;// ROMPE EL BUCLE CUANDO A SE AGREGA EL GRUPO, PARA QUE CONTINUE CON EL
+							// SIGUIENTE GRUPO
 				}
 			}
 		}
 
-		
-		
-			for (Alumno alum : listaAlumnos) {
-				for (Asignatura asignatura : listaAsiganturas) {
-				System.out.println("Desea añadir este alumno a la asignatura " + asignatura.getNombreAsignatura()
-						+ "  ? s/n " + alum);
+		for (Alumno alum : listaAlumnos) {// RECORRERA LA LISTA DE ALUMNOS
+			for (Asignatura asignatur : listaAsiganturas) {// RECORRERA LA LISTA DE ASIGNATURAS
+				System.out.println(
+						"Desea añadir el" + alum + " a la asignatura " + asignatur.getNombreAsignatura() + "  ? s/n ");
 				String opcionGrupo = sc.next();
 				if (opcionGrupo.equalsIgnoreCase("s")) {
-					for (Grupo group : listaGrupo) {
+					for (Grupo group : listaGrupo) {// RECORRERA LA LISTA DE GRUPO
+						group=new Grupo();
 						System.out.println(
-								"Desea añadir este alumno al grupo " + group.getNombreGrupo() + "? s/n " + alum);
+								"Desea añadir el alumno" + alum + " al grupo " + group.getNombreGrupo() + "? s/n ");
 						String opcion = sc.next();
 						if (opcion.equalsIgnoreCase("s")) {
-							grupo1.agregarAlumno(alum);
+							group.agregarAlumno(alum);// SE AGREGA EL ALUMNO SELECECIONADO AL GRUPO
 							break;
 						}
 
 					}
 				}
+				break;
 
 			}
 		}
@@ -98,6 +255,21 @@ public class PrincipalArea {
 
 		}
 
-	}
+		System.out.println("Desea ver la lista de un grupo? s/n");
+		String opcionLista = sc.next();
+		if (opcionLista.equalsIgnoreCase("s")) {
 
+			System.out.println("Ingrese el codigo del grupo que desa ver");
+			int codigoGrupoLista = sc.nextInt();
+			for (Grupo group : listaGrupo) {
+				if ((group.getCodigoGrupo()) == codigoGrupoLista) {
+					group.listarAlumnos(alumno);
+				}
+
+			}
+
+			grupo.listarAlumnos(alumno);
+
+		}
+	}
 }

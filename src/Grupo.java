@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,18 +9,23 @@ public class Grupo {
 	private String nombreGrupo;
 	private int codigoGrupo;
 	private List<Alumno> listaAlumnos = new ArrayList<Alumno>();
-	Scanner sc = new Scanner(System.in);
+	
 
 	Docente docente;
 
-	public Grupo(String horario, String nombreGrupo, int codigoGrupo, Docente docente) {
+	public Grupo(String horario, String nombreGrupo, int codigoGrupo) {
 		super();
 		this.horario = horario;
 		this.nombreGrupo = nombreGrupo;
 		this.codigoGrupo = codigoGrupo;
+	
+	}
+    
+	public Grupo(Docente docente) {
 		this.docente = docente;
 	}
 
+	
 	public Grupo() {
 
 	}
@@ -55,9 +61,25 @@ public class Grupo {
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
+	
 
 	public void agregarAlumno(Alumno alumno) {
 		listaAlumnos.add(alumno);
+	}
+	
+	public void listarAlumnos(Alumno alumno) {
+		if (listaAlumnos.isEmpty()) {
+			System.out.println("La lista está vacia");
+			return;
+		}
+
+		Iterator it = listaAlumnos.iterator();
+
+		System.out.println("La lista de alumnos es: ");
+		while (it.hasNext()) {
+			System.out.println(it.next().toString());
+		}
+
 	}
 
 	@Override

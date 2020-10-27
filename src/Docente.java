@@ -3,6 +3,10 @@ public class Docente extends Persona {
 
 	protected int codigoProfesor;
 	protected String areaDocente;
+	
+	public Docente() {
+		super();
+	}
 
 	Docente(String nombre, String apellidos, String anioNacimiento, int codigoProfesor, String areaDocente) {
 		super(nombre, apellidos, anioNacimiento);

@@ -3,6 +3,10 @@ public class Alumno extends Persona {
 
 	public int codigoEstudiantil;
 	public String semestre;
+	
+	public Alumno() {
+		super();
+	}
 
 	Alumno(String nombre, String apellidos, String anioNacimiento, int codigoEstudiantil, String semestre) {
 		super(nombre, apellidos, anioNacimiento);
